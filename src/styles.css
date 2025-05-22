@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.casino-page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding-bottom: 80px; /* để không đè lên nav */
+}
+
+.banner img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.wallet-info {
+  margin: 10px 0;
+  font-weight: bold;
+  text-align: center;
+}
+
+.game-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px;
+}
+
+.game-item {
+  width: 140px;
+  text-align: center;
+}
+
+.game-item img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background: #eee;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  font-size: 14px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  text-align: center;
+}
