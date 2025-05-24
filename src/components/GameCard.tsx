@@ -6,8 +6,8 @@ interface GameCardProps {
 export default function GameCard({ title, image }: GameCardProps) {
   return (
     <div className="game-item">
-      <img src={image} alt={title} style={{ borderRadius: "8px" }} />
-      <div style={{ textAlign: "center" }}>{title}</div>
+      <img src={image} alt={title} style={{ borderRadius: '8px' }} />
+      <div style={{ textAlign: 'center' }}>{title}</div>
     </div>
   );
 }
