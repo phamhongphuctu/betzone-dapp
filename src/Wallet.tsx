@@ -3,14 +3,22 @@ import React from 'react';
 export default function Wallet() {
   const handleDeposit = async () => {
     try {
+      if (!window.Pi || !window.Pi.createPayment) {
+        alert('❌ Pi SDK chưa sẵn sàng. Hãy chắc chắn bạn đang dùng Pi Browser Testnet.');
+        return;
+      }
+
       const payment = await window.Pi.createPayment({
         amount: 1, // Testnet không trừ thật
         memo: 'Nạp Pi vào Betzone (Testnet)',
         metadata: { type: 'deposit', source: 'wallet' },
       });
+
       console.log('✅ Đã gửi yêu cầu nạp Pi:', payment);
+      alert('✅ Đã gửi yêu cầu nạp Pi test.');
     } catch (error) {
       console.error('❌ Lỗi khi gửi yêu cầu nạp Pi:', error);
+      alert('❌ Có lỗi xảy ra khi nạp Pi. Kiểm tra console để biết chi tiết.');
     }
   };
 
