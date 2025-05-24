@@ -7,13 +7,21 @@ export default function HomePage() {
         const scopes = ['username', 'payments'];
         const authResult = await window.Pi.authenticate(scopes);
         console.log('✅ Đăng nhập thành công:', authResult);
-        // TODO: Lưu authResult nếu cần
+
+        // ✅ Gửi yêu cầu thanh toán test 1 Pi (trên Testnet, không thực sự trừ tiền)
+        const payment = await (window.Pi as any).createPayment({
+          amount: 1,
+          memo: 'Test transaction for Pi SDK setup',
+          metadata: { test: true },
+        });
+
+        console.log('✅ Thanh toán thành công:', payment);
       } catch (error) {
-        console.error('❌ Đăng nhập thất bại:', error);
+        console.error('❌ Lỗi khi đăng nhập hoặc thanh toán:', error);
       }
     };
 
-    loginWithPi(); // ✅ Gọi khi vào trang Home
+    loginWithPi();
   }, []);
 
   return (
@@ -40,4 +48,3 @@ export default function HomePage() {
     </div>
   );
 }
-
