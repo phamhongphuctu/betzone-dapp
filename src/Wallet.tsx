@@ -3,14 +3,14 @@ import React from 'react';
 export default function Wallet() {
   const handleDeposit = async () => {
     try {
-      const payment = await (window.Pi as any).createPayment({
-        amount: 1,
-        memo: 'Nạp Pi vào Betzone (test)',
-        metadata: { type: 'deposit' },
+      const payment = await window.Pi.createPayment({
+        amount: 1, // Testnet không trừ thật
+        memo: 'Nạp Pi vào Betzone (Testnet)',
+        metadata: { type: 'deposit', source: 'wallet' },
       });
-      console.log('✅ Giao dịch nạp Pi thành công:', payment);
+      console.log('✅ Đã gửi yêu cầu nạp Pi:', payment);
     } catch (error) {
-      console.error('❌ Lỗi khi nạp Pi:', error);
+      console.error('❌ Lỗi khi gửi yêu cầu nạp Pi:', error);
     }
   };
 

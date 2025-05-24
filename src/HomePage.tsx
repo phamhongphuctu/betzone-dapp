@@ -4,12 +4,14 @@ export default function HomePage() {
   useEffect(() => {
     const loginWithPi = async () => {
       try {
+        const Pi = (window as any).Pi;
+
         const scopes = ['username', 'payments'];
-        const authResult = await window.Pi.authenticate(scopes);
+        const authResult = await Pi.authenticate(scopes);
         console.log('✅ Đăng nhập thành công:', authResult);
 
-        // ✅ Gửi yêu cầu thanh toán test 1 Pi (trên Testnet, không thực sự trừ tiền)
-        const payment = await (window.Pi as any).createPayment({
+        // ✅ Gửi yêu cầu thanh toán test 1 Pi (Testnet, không trừ thật)
+        const payment = await Pi.createPayment({
           amount: 1,
           memo: 'Test transaction for Pi SDK setup',
           metadata: { test: true },

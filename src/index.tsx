@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 
-// ✅ Khai báo kiểu cho window.Pi nếu chưa có trong global.d.ts
-// Có thể xoá nếu đã có file global.d.ts định nghĩa window.Pi
-// ✅ Khởi tạo Pi SDK
-window.Pi.init({
+// ✅ Khởi tạo Pi SDK đúng cách (fix lỗi TS)
+const Pi = (window as any).Pi;
+
+Pi.init({
   version: "2.0",
   appId: "betzone", // Nếu đã verify appId thật thì thay vào đây
 });
