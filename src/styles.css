@@ -1,25 +1,43 @@
-body {
+/* Reset & layout chung */
+* {
   margin: 0;
-  font-family: sans-serif;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.casino-page {
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+  line-height: 1.6;
+}
+
+/* Trang chính có padding tránh nav */
+.page-container {
   max-width: 480px;
   margin: 0 auto;
-  padding-bottom: 80px; /* để không đè lên nav */
+  padding-bottom: 80px;
 }
 
+/* Banner */
 .banner img {
   width: 100%;
   border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
+/* Ví */
 .wallet-info {
   margin: 10px 0;
+  padding: 12px;
+  background-color: #222;
+  color: white;
+  border-radius: 10px;
   font-weight: bold;
   text-align: center;
 }
 
+/* Danh sách game */
 .game-card {
   display: flex;
   flex-wrap: wrap;
@@ -36,23 +54,31 @@ body {
 .game-item img {
   width: 100%;
   border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
 }
 
-nav {
+/* Nav dưới cùng */
+nav.bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   display: flex;
   justify-content: space-around;
-  background: #eee;
-  padding: 10px;
+  background: #fff;
+  padding: 10px 0;
   border-top: 1px solid #ccc;
   font-size: 14px;
+  z-index: 999;
 }
 
-nav a {
+nav.bottom-nav a {
   text-decoration: none;
-  color: #333;
+  color: #666;
   text-align: center;
+  font-weight: 500;
+}
+
+nav.bottom-nav a.active {
+  color: #007bff;
 }
