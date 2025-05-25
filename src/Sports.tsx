@@ -1,13 +1,18 @@
+import React from 'react';
+import { useTranslation } from './useTranslation';
+
 export default function Sports() {
+  const { t } = useTranslation();
+
   return (
     <div style={{ padding: '20px' }}>
-      <h2>Sports Betting</h2>
+      <h2>{t.sports}</h2>
       <div style={{ marginTop: '15px' }}>
-        <div style={{ marginBottom: '10px' }}>⚽ Bóng đá</div>
-        <div style={{ marginBottom: '10px' }}>🏀 Bóng rổ</div>
-        <div style={{ marginBottom: '10px' }}>🎾 Quần vợt</div>
-        <div style={{ marginBottom: '10px' }}>🏐 Bóng chuyền</div>
-        <div style={{ marginBottom: '10px' }}>🥊 MMA / Boxing</div>
+        <div style={{ marginBottom: '10px' }}>⚽ {t.soccer}</div>
+        <div style={{ marginBottom: '10px' }}>🏀 {t.basketball}</div>
+        <div style={{ marginBottom: '10px' }}>🎾 {t.tennis}</div>
+        <div style={{ marginBottom: '10px' }}>🏐 {t.volleyball}</div>
+        <div style={{ marginBottom: '10px' }}>🥊 {t.mma}</div>
       </div>
     </div>
   );

@@ -1,37 +1,45 @@
+import React from 'react';
+import { useLanguage } from './LanguageContext';
+import { useTranslation } from './useTranslation'; // ✅ dùng hook mới
+
 export default function Profile() {
+  const { lang, setLang } = useLanguage();
+  const { t } = useTranslation(); // ✅ gọn gàng
+
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Thông tin cá nhân</h2>
+    <div style={{ padding: '20px' }}>
+      <h2>{t.profile}</h2>
       <p>
-        <strong>Username:</strong> anh-tu
+        <strong>{t.user}:</strong> anh-tu
       </p>
       <p>
         <strong>ID:</strong> 123456789
       </p>
       <p>
-        <strong>Tham gia từ:</strong> 22 Tháng 5, 2025
+        <strong>Joined:</strong> 22 Tháng 5, 2025
       </p>
 
-      <h3 style={{ marginTop: "20px" }}>Ngôn ngữ</h3>
-      <select>
-        <option>Tiếng Việt</option>
-        <option>English</option>
+      <h3 style={{ marginTop: '20px' }}>🌐 Language</h3>
+      <select value={lang} onChange={(e) => setLang(e.target.value as 'vi' | 'en' | 'es')}>
+        <option value="vi">Tiếng Việt</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
       </select>
 
-      <h3 style={{ marginTop: "20px" }}>Thưởng</h3>
+      <h3 style={{ marginTop: '20px' }}>{t.promotions}</h3>
       <div
         style={{
-          background: "#333",
-          color: "#fff",
-          padding: "10px",
-          borderRadius: "10px",
+          background: '#333',
+          color: '#fff',
+          padding: '10px',
+          borderRadius: '10px',
         }}
       >
-        🎁 100 lượt quay miễn phí
+        🎁 {t.promo1}
         <br />
-        💰 Tổng thưởng: 0.000000 Pi
+        💰 {t.promo2}
         <br />
-        <i style={{ fontSize: "12px", opacity: 0.7 }}>Chờ xử lý</i>
+        <i style={{ fontSize: '12px', opacity: 0.7 }}>{t.pending}</i>
       </div>
     </div>
   );

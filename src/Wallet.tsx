@@ -1,6 +1,9 @@
 import React from 'react';
+import { useTranslation } from "./useTranslation";
 
 export default function Wallet() {
+  const { t } = useTranslation();
+
   const handleDeposit = async () => {
     try {
       if (!window.Pi || !window.Pi.createPayment) {
@@ -9,7 +12,7 @@ export default function Wallet() {
       }
 
       const payment = await window.Pi.createPayment({
-        amount: 1, // Testnet không trừ thật
+        amount: 1,
         memo: 'Nạp Pi vào Betzone (Testnet)',
         metadata: { type: 'deposit', source: 'wallet' },
       });
@@ -28,18 +31,18 @@ export default function Wallet() {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h2>Ví Pi</h2>
+      <h2>{t.wallet}</h2>
       <p>
-        Số dư hiện tại: <strong>3,000 Pi</strong>
+        {t.balance}: <strong>3,000 Pi</strong>
       </p>
       <button onClick={handleDeposit} style={{ marginTop: '10px' }}>
-        Nạp Pi
+        🔼 {t.pending} Nạp Pi
       </button>
       <button onClick={handleWithdraw} style={{ marginLeft: '10px' }}>
-        Rút Pi
+        🔽 Rút Pi
       </button>
 
-      <h3 style={{ marginTop: '20px' }}>Lịch sử giao dịch</h3>
+      <h3 style={{ marginTop: '20px' }}>📜 Lịch sử giao dịch</h3>
       <ul>
         <li>+500 Pi từ phần thưởng (hôm qua)</li>
         <li>-100 Pi chơi Slot Game</li>
