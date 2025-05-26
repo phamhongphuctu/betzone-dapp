@@ -1,6 +1,14 @@
-import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect
+} from "react";
+import i18n from "./i18n"; // ✅ import đúng (đã export default)
 
-type Language = "vi" | "en" | "es";
+export type Language = "vi" | "en" | "es";
+
 
 interface LanguageContextProps {
   lang: Language;
@@ -9,7 +17,7 @@ interface LanguageContextProps {
 
 const LanguageContext = createContext<LanguageContextProps>({
   lang: "vi",
-  setLang: () => {},
+  setLang: () => {}
 });
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
@@ -20,6 +28,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     localStorage.setItem("lang", lang);
+    i18n.changeLanguage(lang); // tự động đổi ngôn ngữ khi thay đổi
   }, [lang]);
 
   return (

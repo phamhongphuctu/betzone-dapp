@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "./useTranslation"; // ✅ chuẩn
-
+import { useTranslation } from "./useTranslation";
+import { useLanguage } from "./LanguageContext";
+import type { Language } from "./LanguageContext";
 
 export default function HomePage() {
   const { t } = useTranslation();
+  const { lang } = useLanguage(); // không dùng setLang ở đây
   const [piUser, setPiUser] = useState<any>(null);
   const [balance, setBalance] = useState<number | null>(null);
 
@@ -14,7 +16,7 @@ export default function HomePage() {
         const scopes = ["username", "payments"];
         const authResult = await Pi.authenticate(scopes);
         setPiUser(authResult.user);
-        setBalance(3.1415); // demo số dư
+        setBalance(3.1415); // ✅ giá trị demo Pi
       } catch (error) {
         console.error("❌ Pi login error:", error);
       }
@@ -45,7 +47,7 @@ export default function HomePage() {
         }}
       >
         <p>👤 {t.user}: {piUser?.username || t.pending}</p>
-        <p>💰 {t.balance}: {balance !== null ? `${balance} Pi` : t.pending}</p>
+        <p>💰 {t.pi_balance}: {balance !== null ? `${balance} Pi` : t.pending}</p>
       </div>
 
       {/* Khuyến mãi */}
@@ -60,3 +62,4 @@ export default function HomePage() {
     </div>
   );
 }
+

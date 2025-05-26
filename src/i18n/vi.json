@@ -1,0 +1,15 @@
+{
+  "welcome": "Chào mừng",
+  "logout": "Đăng xuất",
+  "login": "Đăng nhập",
+  "username": "Người dùng",
+  "pi_balance": "Số dư Pi",
+  "pending": "Chờ xử lý",
+  "id": "Mã số",
+  "joined": "Tham gia từ",
+  "user": "Người dùng",
+  "promotions": "Khuyến mãi hấp dẫn",
+  "promo1": "Tặng 50 lượt quay miễn phí khi đăng nhập",
+  "promo2": "Hoàn 10% Pi thua mỗi ngày",
+  "promo3": "Đua top hàng tuần nhận 300 Pi"
+}
