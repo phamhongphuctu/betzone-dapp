@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslation } from './useTranslation';
+import { useTranslation } from "./useTranslation";
 
 export default function Earn() {
   const { t } = useTranslation();
@@ -16,11 +16,11 @@ export default function Earn() {
         <li>🏆 {t.promo3}</li>
       </ul>
 
-      <h3 style={{ marginTop: '20px' }}>🪙 {t.howToEarn || "Các cách kiếm Pi:"}</h3>
+      <h3 style={{ marginTop: '20px' }}>🪙 {t.howToEarn}</h3>
       <ul>
-        <li>🔁 {t.refer || "Giới thiệu bạn bè"}</li>
-        <li>🎮 {t.play || "Chơi game và hoàn Pi"}</li>
-        <li>📈 {t.promote || "Tham gia chương trình khuyến mãi"}</li>
+        <li>🔗 {t.refer}</li>
+        <li>🎮 {t.play}</li>
+        <li>📈 {t.promote}</li>
       </ul>
     </div>
   );

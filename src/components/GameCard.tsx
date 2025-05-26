@@ -1,13 +1,8 @@
-interface GameCardProps {
-  title: string;
-  image: string;
-}
-
-export default function GameCard({ title, image }: GameCardProps) {
+export default function GameCard({ title, image }: { title: string; image: string }) {
   return (
-    <div className="game-item">
-      <img src={image} alt={title} style={{ borderRadius: '8px' }} />
-      <div style={{ textAlign: 'center' }}>{title}</div>
+    <div className="w-[150px] flex-shrink-0 text-center">
+      <img src={image} alt={title} className="w-full rounded-lg mb-1" />
+      <p className="text-sm font-medium">{title}</p>
     </div>
   );
 }
