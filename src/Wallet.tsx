@@ -7,7 +7,7 @@ export default function Wallet() {
   const handleDeposit = async () => {
     try {
       if (!window.Pi || !window.Pi.createPayment) {
-        alert('❌ Pi SDK chưa sẵn sàng. Hãy chắc chắn bạn đang dùng Pi Browser Testnet.');
+        alert(t.sdk_not_ready);
         return;
       }
 
@@ -17,16 +17,16 @@ export default function Wallet() {
         metadata: { type: 'deposit', source: 'wallet' },
       });
 
-      console.log('✅ Đã gửi yêu cầu nạp Pi:', payment);
-      alert('✅ Đã gửi yêu cầu nạp Pi test.');
+      console.log(t.deposit_success, payment);
+      alert(t.deposit_sent);
     } catch (error) {
-      console.error('❌ Lỗi khi gửi yêu cầu nạp Pi:', error);
-      alert('❌ Có lỗi xảy ra khi nạp Pi. Kiểm tra console để biết chi tiết.');
+      console.error(t.deposit_error, error);
+      alert(t.deposit_failed);
     }
   };
 
   const handleWithdraw = () => {
-    alert('👉 Tính năng rút Pi đang được phát triển.');
+    alert(t.withdraw_not_ready);
   };
 
   return (
@@ -35,18 +35,54 @@ export default function Wallet() {
       <p>
         {t.balance}: <strong>3,000 Pi</strong>
       </p>
-      <button onClick={handleDeposit} style={{ marginTop: '10px' }}>
-        🔼 {t.pending} Nạp Pi
-      </button>
-      <button onClick={handleWithdraw} style={{ marginLeft: '10px' }}>
-        🔽 Rút Pi
+
+      {/* Nút Nạp Pi */}
+      <button
+        onClick={handleDeposit}
+        style={{
+          marginTop: '10px',
+          width: '40px',
+          height: '40px',
+          borderRadius: '6px',
+          border: '1px solid #ccc',
+          backgroundColor: '#f5f5f5',
+          fontSize: '20px',
+          fontWeight: 'bold',
+          cursor: 'pointer',
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
+        ⬆
       </button>
 
-      <h3 style={{ marginTop: '20px' }}>📜 Lịch sử giao dịch</h3>
+      {/* Nút Rút Pi */}
+      <button
+        onClick={handleWithdraw}
+        style={{
+          marginLeft: '10px',
+          width: '40px',
+          height: '40px',
+          borderRadius: '6px',
+          border: '1px solid #ccc',
+          backgroundColor: '#f5f5f5',
+          fontSize: '20px',
+          fontWeight: 'bold',
+          cursor: 'pointer',
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
+        ⬇
+      </button>
+
+      <h3 style={{ marginTop: '20px' }}>📜 {t.transaction_history}</h3>
       <ul>
-        <li>+500 Pi từ phần thưởng (hôm qua)</li>
-        <li>-100 Pi chơi Slot Game</li>
-        <li>+1,000 Pi nạp thủ công</li>
+        <li>+500 Pi {t.reward_yesterday}</li>
+        <li>-100 Pi {t.slot_game}</li>
+        <li>+1,000 Pi {t.manual_deposit}</li>
       </ul>
     </div>
   );

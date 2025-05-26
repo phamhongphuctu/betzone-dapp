@@ -5,5 +5,46 @@
   "promotions": "Promociones",
   "promo1": "Consigue 50 giros gratis al iniciar sesión",
   "promo2": "10% de reembolso diario en Pi",
-  "promo3": "Competencia semanal por 300 Pi"
-}
+  "promo3": "Competencia semanal por 300 Pi",
+  
+    "favorites": "Yêu thích",
+    "recent": "Gần đây chơi",
+    "top_games": "Trò chơi nổi bật",
+    "new_games": "Trò chơi mới",
+    "live": "Casino trực tiếp",
+    "game_shows": "Game show",
+    "all_games": "Tất cả trò chơi",
+    "casino": "Sòng bài", 
+    "sports": "Deportes",
+    "live_today": "En vivo hoy",
+    "upcoming": "Próximamente",
+    "soccer": "Fútbol",
+    "basketball": "Baloncesto",
+    "tennis": "Tenis",
+    "volleyball": "Vóleibol",
+    "mma": "Artes marciales mixtas",
+    "earn": "Ganar Recompensas",
+    "refer": "Invitar Amigos",
+    "play": "Jugar y recibir Pi",
+    "promote": "Unirse a promociones",
+    "howToEarn": "Formas de ganar Pi",
+    "wallet": "Billetera",
+    "balance": "Saldo Pi",
+    "deposit_button": "Depositar Pi",
+    "withdraw_button": "Retirar Pi",
+    "transaction_history": "Historial de transacciones",
+    "reward_yesterday": "de la recompensa de ayer",
+    "slot_game": "por jugar Slot Game",
+    "manual_deposit": "depósito manual",
+    "sdk_not_ready": "❌ SDK de Pi no está listo. Asegúrate de usar Pi Browser Testnet.",
+    "deposit_success": "✅ Solicitud de depósito enviada:",
+    "deposit_sent": "✅ Depósito de prueba enviado.",
+    "deposit_error": "❌ Error al enviar la solicitud de depósito:",
+    "deposit_failed": "❌ Error al depositar Pi. Ver la consola para más detalles.",
+    "withdraw_not_ready": "👉 Función de retiro en desarrollo."
+  
+  
+  
+  }
+  
+

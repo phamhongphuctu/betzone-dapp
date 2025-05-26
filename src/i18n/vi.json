@@ -11,5 +11,46 @@
   "promotions": "Khuyến mãi hấp dẫn",
   "promo1": "Tặng 50 lượt quay miễn phí khi đăng nhập",
   "promo2": "Hoàn 10% Pi thua mỗi ngày",
-  "promo3": "Đua top hàng tuần nhận 300 Pi"
-}
+  "promo3": "Đua top hàng tuần nhận 300 Pi",
+  
+    "favorites": "Yêu thích",
+    "recent": "Gần đây chơi",
+    "top_games": "Trò chơi nổi bật",
+    "new_games": "Trò chơi mới",
+    "live": "Casino trực tiếp",
+    "game_shows": "Game show",
+    "all_games": "Tất cả trò chơi",
+    "casino": "Sòng bài",
+    "sports": "Thể Thao",
+    "live_today": "Trực tiếp hôm nay",
+    "upcoming": "Sắp diễn ra",
+    "soccer": "Bóng đá",
+    "basketball": "Bóng rổ",
+    "tennis": "Quần vợt",
+    "volleyball": "Bóng chuyền",
+    "mma": "Võ tổng hợp",
+    "earn": "Kiếm thưởng",
+    "refer": "Giới thiệu bạn bè",
+    "play": "Chơi game và hoàn Pi",
+    "promote": "Tham gia chương trình khuyến mãi",
+    "howToEarn": "Các cách kiếm Pi",
+    "wallet": "Ví Pi",
+    "balance": "Số dư",
+    "deposit_button": "Nạp Pi",
+    "withdraw_button": "Rút Pi",
+    "transaction_history": "Lịch sử giao dịch",
+    "reward_yesterday": "từ phần thưởng (hôm qua)",
+    "slot_game": "chơi Slot Game",
+    "manual_deposit": "nạp thủ công",
+    "sdk_not_ready": "❌ Pi SDK chưa sẵn sàng. Hãy chắc chắn bạn đang dùng Pi Browser Testnet.",
+    "deposit_success": "✅ Đã gửi yêu cầu nạp Pi:",
+    "deposit_sent": "✅ Đã gửi yêu cầu nạp Pi test.",
+    "deposit_error": "❌ Lỗi khi gửi yêu cầu nạp Pi:",
+    "deposit_failed": "❌ Có lỗi xảy ra khi nạp Pi. Kiểm tra console để biết chi tiết.",
+    "withdraw_not_ready": "👉 Tính năng rút Pi đang được phát triển."
+  
+  
+  
+  }
+  
+
