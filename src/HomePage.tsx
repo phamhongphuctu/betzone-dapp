@@ -11,12 +11,26 @@ export default function HomePage() {
 
   useEffect(() => {
     const loginWithPi = async () => {
+      const Pi = (window as any).Pi;
+      if (!Pi) {
+        console.warn("⚠️ Pi SDK not found. Are you running in Pi Browser?");
+        return;
+      }
+
+      // Nếu đã có user rồi thì không login lại
+      const cached = localStorage.getItem("pi_user");
+      if (cached) {
+        setPiUser(JSON.parse(cached));
+        setBalance(3.1415); // demo
+        return;
+      }
+
       try {
-        const Pi = (window as any).Pi;
         const scopes = ["username", "payments"];
         const authResult = await Pi.authenticate(scopes);
         setPiUser(authResult.user);
-        setBalance(3.1415); // ✅ giá trị demo Pi
+        localStorage.setItem("pi_user", JSON.stringify(authResult.user));
+        setBalance(3.1415); // demo
       } catch (error) {
         console.error("❌ Pi login error:", error);
       }
@@ -48,6 +62,26 @@ export default function HomePage() {
       >
         <p>👤 {t.user}: {piUser?.username || t.pending}</p>
         <p>💰 {t.pi_balance}: {balance !== null ? `${balance} Pi` : t.pending}</p>
+
+        {piUser && (
+          <button
+            onClick={() => {
+              localStorage.removeItem("pi_user");
+              window.location.reload();
+            }}
+            style={{
+              marginTop: "10px",
+              padding: "8px 12px",
+              backgroundColor: "#444",
+              color: "#fff",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer"
+            }}
+          >
+            🔓 {t.logout || "Đăng xuất"}
+          </button>
+        )}
       </div>
 
       {/* Khuyến mãi */}
@@ -62,4 +96,3 @@ export default function HomePage() {
     </div>
   );
 }
-
