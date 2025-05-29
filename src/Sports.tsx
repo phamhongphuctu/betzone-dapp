@@ -1,11 +1,24 @@
 import React from 'react';
-import { useTranslation } from './useTranslation';
+import { useTranslation } from './useTranslation';  // thêm import useTranslation
+import SportCard from './components/SportCard';
+
+   
 
 export default function Sports() {
   const { t } = useTranslation();
+  // phần còn lại giữ nguyên
+
+  const username = "anh-tu";
+  const balance = 3000;
 
   return (
     <div className="p-4 space-y-6">
+      {/* Thông tin người dùng */}
+      <div className="bg-gray-800 text-white p-4 rounded-lg shadow-md mb-4">
+        <p>Người dùng: <strong>{username}</strong></p>
+        <p>Số dư Pi: <strong>{balance.toLocaleString()} Pi</strong></p>
+      </div>
+
       {/* Banner thể thao */}
       <div>
         <img
@@ -33,15 +46,6 @@ export default function Sports() {
           <SportCard icon="🥊" title={t.mma} />
         </div>
       </div>
-    </div>
-  );
-}
-
-function SportCard({ icon, title }: { icon: string; title: string }) {
-  return (
-    <div className="min-w-[120px] bg-gray-100 rounded-lg p-4 shadow text-center">
-      <div className="text-3xl">{icon}</div>
-      <div className="mt-2 font-medium">{title}</div>
     </div>
   );
 }
