@@ -8,10 +8,10 @@ import Sports from "./Sports";
 import Wallet from "./Wallet";
 import Earn from "./Earn";
 import Profile from "./Profile";
+import SlotGame from "./components/SlotGame"; // ✅ Thêm dòng này
 
 import { useLanguage } from "./LanguageContext";
-import { translationsMap } from "./translations"
-
+import { translationsMap } from "./translations";
 
 function AppContent() {
   const { lang } = useLanguage();
@@ -44,6 +44,7 @@ function AppContent() {
         <Route path="/wallet" element={<Wallet />} />
         <Route path="/earn" element={<Earn />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/slot" element={<SlotGame />} /> {/* ✅ Đã import đúng */}
       </Routes>
 
       {/* Thanh điều hướng dưới cùng */}
@@ -73,9 +74,7 @@ function AppContent() {
 export default function App() {
   return (
     <Router>
-      
-        <AppContent />
-      
+      <AppContent />
     </Router>
   );
 }
