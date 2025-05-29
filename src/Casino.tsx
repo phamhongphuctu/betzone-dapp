@@ -24,7 +24,8 @@ export default function Casino() {
       <div>
         <h3 className="text-xl font-bold mb-2 flex items-center gap-2">🔥 {t.top_games}</h3>
         <div className="flex gap-4 overflow-x-auto">
-          <GameCard title="Slot Game" image="https://via.placeholder.com/150x150?text=Slot+Game" />
+        <GameCard title="Slot Game" image="/01.PNG" />
+
           <GameCard title="Gates of Olympus" image="https://via.placeholder.com/150x150?text=Olympus" />
           <GameCard title="Candy Boom" image="https://via.placeholder.com/150x150?text=Candy+Boom" />
         </div>
