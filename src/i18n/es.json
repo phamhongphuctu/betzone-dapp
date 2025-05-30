@@ -44,5 +44,7 @@
   "deposit_sent": "✅ Depósito de prueba enviado.",
   "deposit_error": "❌ Error al enviar la solicitud de depósito:",
   "deposit_failed": "❌ Error al depositar Pi. Revisa la consola para más detalles.",
-  "withdraw_not_ready": "👉 Función de retiro en desarrollo."
+  "withdraw_not_ready": "👉 Función de retiro en desarrollo.",
+  "homepage_welcome": "🎉 ¡Bienvenido a Betzone! ¡Diviértete y mucha suerte!"
+
 }

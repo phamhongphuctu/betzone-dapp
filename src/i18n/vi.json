@@ -1,4 +1,5 @@
 {"profile": "Thông tin cá nhân",
+
 "welcome": "Chào mừng",
   "logout": "Đăng xuất",
   "login": "Đăng nhập",
@@ -47,8 +48,9 @@
     "deposit_sent": "✅ Đã gửi yêu cầu nạp Pi test.",
     "deposit_error": "❌ Lỗi khi gửi yêu cầu nạp Pi:",
     "deposit_failed": "❌ Có lỗi xảy ra khi nạp Pi. Kiểm tra console để biết chi tiết.",
-    "withdraw_not_ready": "👉 Tính năng rút Pi đang được phát triển."
-    
-  }
+    "withdraw_not_ready": "👉 Tính năng rút Pi đang được phát triển.",
+"homepage_welcome": "🎉 Chào mừng bạn đến với Betzone! Hãy chơi vui và may mắn nhé!"
+}
+
   
 

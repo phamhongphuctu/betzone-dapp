@@ -47,5 +47,7 @@
   "deposit_sent": "✅ Pi test deposit sent.",
   "deposit_error": "❌ Error sending Pi deposit request:",
   "deposit_failed": "❌ Failed to deposit Pi. Check console for details.",
-  "withdraw_not_ready": "👉 Withdraw feature is under development."
+  "withdraw_not_ready": "👉 Withdraw feature is under development.",
+  "homepage_welcome": "🎉 Welcome to Betzone! Have fun and good luck!"
+
 }

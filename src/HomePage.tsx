@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useTranslation } from 'react-i18next';
-
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const { t } = useTranslation();
@@ -14,7 +14,6 @@ export default function HomePage() {
         return;
       }
 
-      // Nếu đã cache user trong localStorage thì dùng luôn
       const cached = localStorage.getItem("pi_user");
       if (cached) {
         setPiUser(JSON.parse(cached));
@@ -22,7 +21,6 @@ export default function HomePage() {
       }
 
       try {
-        // Yêu cầu quyền lấy username, payments nếu cần
         const user = await Pi.authenticate({ scopes: ["username"] });
         setPiUser(user);
         localStorage.setItem("pi_user", JSON.stringify(user));
@@ -36,7 +34,7 @@ export default function HomePage() {
 
   return (
     <div style={{ padding: "20px" }}>
-      {/* Hiển thị username hoặc thông báo */}
+      {/* Thông tin user */}
       <div
         style={{
           backgroundColor: "#222",
@@ -47,6 +45,45 @@ export default function HomePage() {
         }}
       >
         <p>👤 {t("user")}: {piUser?.username || t("pending")}</p>
+      </div>
+
+      {/* 👋 Lời chào mừng */}
+      <h2 style={{ fontSize: "20px", marginBottom: "20px" }}>
+        {t("homepage_welcome")}
+      </h2>
+
+      {/* Banner Welcome Bonus */}
+      <div
+        style={{
+          backgroundImage: 'url("https://via.placeholder.com/600x200?text=Welcome+Bonus")',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          borderRadius: "12px",
+          padding: "40px 20px",
+          color: "#fff",
+          textAlign: "center",
+          marginBottom: "30px",
+        }}
+      >
+        <h2 style={{ fontSize: "24px", fontWeight: "bold" }}>{t("promotions")}</h2>
+        <p style={{ fontSize: "16px", marginTop: "10px" }}>{t("promo1")}</p>
+
+        <Link to="/wallet">
+          <button
+            style={{
+              marginTop: "20px",
+              padding: "12px 24px",
+              fontWeight: "bold",
+              borderRadius: "8px",
+              background: "yellow",
+              border: "none",
+              color: "#000",
+              cursor: "pointer",
+            }}
+          >
+            🚀 {t("deposit_button")}
+          </button>
+        </Link>
       </div>
     </div>
   );
