@@ -10,17 +10,19 @@ export default function HomePage() {
   useEffect(() => {
     const loginWithPi = async () => {
       const Pi = (window as any).Pi;
-      if (!Pi) {
-        console.warn("⚠️ Pi SDK not found. Please open in Pi Browser.");
+  
+      // ✅ Kiểm tra SDK có đầy đủ không
+      if (!Pi || !Pi.createPayment) {
+        alert("❌ Pi SDK chưa sẵn sàng. Hãy chắc chắn bạn đang dùng Pi Browser Testnet.");
         return;
       }
-
+  
       const cached = localStorage.getItem("pi_user");
       if (cached) {
         setPiUser(JSON.parse(cached));
         return;
       }
-
+  
       try {
         const user = await Pi.authenticate({ scopes: ["username"] });
         setPiUser(user);
@@ -29,9 +31,10 @@ export default function HomePage() {
         console.error("Pi login error:", error);
       }
     };
-
+  
     loginWithPi();
   }, []);
+  
 
   const handleGoToDeposit = () => {
     navigate('/wallet', { state: { showDeposit: true } });
