@@ -21,22 +21,36 @@ export default function WalletInfo({ username, balance }: WalletInfoProps) {
     try {
       Pi.createPayment(
         {
-          amount: 1, // 👉 Anh Từ có thể thay đổi số Pi muốn nạp
+          amount: 1, // 👉 Có thể thay đổi số Pi muốn nạp
           memo: username,
           metadata: { type: "deposit", username },
         },
         {
-          onReadyForServerApproval: (paymentId: string) => {
+          onReadyForServerApproval: async (paymentId: string) => {
             console.log("✅ Ready for server approval", paymentId);
+            await fetch("https://betzone-wallet-api.onrender.com/api/approve-payment", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ paymentId }),
+            });
           },
-          onReadyForServerCompletion: (paymentId: string, txid: string) => {
+
+          onReadyForServerCompletion: async (paymentId: string, txid: string) => {
             console.log("✅ Ready for server completion", paymentId, txid);
+            await fetch("https://betzone-wallet-api.onrender.com/api/complete-payment", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ paymentId, txid }),
+            });
           },
+
           onCancel: (paymentId: string) => {
             console.warn("❌ Payment cancelled", paymentId);
           },
+
           onError: (error: any) => {
             console.error("❌ Payment error", error);
+            alert(t("deposit_error"));
           },
         }
       );
@@ -58,6 +72,7 @@ export default function WalletInfo({ username, balance }: WalletInfoProps) {
     >
       <p>👤 {t("username")}: {username}</p>
       <p>💰 {t("pi_balance")}: {balance.toLocaleString()} Pi</p>
+
       <button
         style={{
           marginTop: "10px",
