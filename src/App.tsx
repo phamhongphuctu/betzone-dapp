@@ -8,14 +8,12 @@ import Sports from "./Sports";
 import Wallet from "./Wallet";
 import Earn from "./Earn";
 import Profile from "./Profile";
-import SlotGame from "./components/SlotGame"; // ✅ Thêm dòng này
+import SlotGame from "./components/SlotGame";
 
-import { useLanguage } from "./LanguageContext";
-import { translationsMap } from "./translations";
+import { useTranslation } from "react-i18next"; // ✅ dùng hook i18n
 
 function AppContent() {
-  const { lang } = useLanguage();
-  const t = translationsMap[lang];
+  const { t } = useTranslation(); // ✅ dùng t("...") thay cho t.xxx
 
   return (
     <div className="page-container" style={{ position: "relative", minHeight: "100vh" }}>
@@ -32,7 +30,7 @@ function AppContent() {
             fontSize: "14px",
           }}
         >
-          👤 {t.profile}
+          👤 {t("profile")}
         </Link>
       </div>
 
@@ -44,7 +42,7 @@ function AppContent() {
         <Route path="/wallet" element={<Wallet />} />
         <Route path="/earn" element={<Earn />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/slot" element={<SlotGame />} /> {/* ✅ Đã import đúng */}
+        <Route path="/slot" element={<SlotGame />} />
       </Routes>
 
       {/* Thanh điều hướng dưới cùng */}
@@ -61,11 +59,11 @@ function AppContent() {
           borderTop: "1px solid #ccc",
         }}
       >
-        <Link to="/">{t.home}</Link>
-        <Link to="/casino">{t.casino}</Link>
-        <Link to="/sports">{t.sports}</Link>
-        <Link to="/wallet">{t.wallet}</Link>
-        <Link to="/earn">{t.earn}</Link>
+        <Link to="/">{t("home")}</Link>
+        <Link to="/casino">{t("casino")}</Link>
+        <Link to="/sports">{t("sports")}</Link>
+        <Link to="/wallet">{t("wallet")}</Link>
+        <Link to="/earn">{t("earn")}</Link>
       </nav>
     </div>
   );

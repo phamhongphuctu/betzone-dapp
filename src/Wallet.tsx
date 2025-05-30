@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslation } from "./useTranslation";
+import { useTranslation } from 'react-i18next';
 
 export default function Wallet() {
   const { t } = useTranslation();
@@ -7,7 +7,7 @@ export default function Wallet() {
   const handleDeposit = async () => {
     try {
       if (!window.Pi || !window.Pi.createPayment) {
-        alert(t.sdk_not_ready);
+        alert(t('sdk_not_ready'));
         return;
       }
 
@@ -17,26 +17,25 @@ export default function Wallet() {
         metadata: { type: 'deposit', source: 'wallet' },
       });
 
-      console.log(t.deposit_success, payment);
-      alert(t.deposit_sent);
+      console.log(t('deposit_success'), payment);
+      alert(t('deposit_sent'));
     } catch (error) {
-      console.error(t.deposit_error, error);
-      alert(t.deposit_failed);
+      console.error(t('deposit_error'), error);
+      alert(t('deposit_failed'));
     }
   };
 
   const handleWithdraw = () => {
-    alert(t.withdraw_not_ready);
+    alert(t('withdraw_not_ready'));
   };
 
   return (
     <div style={{ padding: '20px' }}>
-      <h2>{t.wallet}</h2>
+      <h2>{t('wallet')}</h2>
       <p>
-        {t.balance}: <strong>3,000 Pi</strong>
+        {t('balance')}: <strong>3,000 Pi</strong>
       </p>
 
-      {/* Nút Nạp Pi */}
       <button
         onClick={handleDeposit}
         style={{
@@ -51,13 +50,12 @@ export default function Wallet() {
           cursor: 'pointer',
           display: 'inline-flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
         }}
       >
         ⬆
       </button>
 
-      {/* Nút Rút Pi */}
       <button
         onClick={handleWithdraw}
         style={{
@@ -72,17 +70,17 @@ export default function Wallet() {
           cursor: 'pointer',
           display: 'inline-flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
         }}
       >
         ⬇
       </button>
 
-      <h3 style={{ marginTop: '20px' }}>📜 {t.transaction_history}</h3>
+      <h3 style={{ marginTop: '20px' }}>📜 {t('transaction_history')}</h3>
       <ul>
-        <li>+500 Pi {t.reward_yesterday}</li>
-        <li>-100 Pi {t.slot_game}</li>
-        <li>+1,000 Pi {t.manual_deposit}</li>
+        <li>+500 Pi {t('reward_yesterday')}</li>
+        <li>-100 Pi {t('slot_game')}</li>
+        <li>+1,000 Pi {t('manual_deposit')}</li>
       </ul>
     </div>
   );

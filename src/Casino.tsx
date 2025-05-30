@@ -1,7 +1,7 @@
 import React from 'react';
 import GameCard from './components/GameCard';
 import WalletInfo from './components/WalletInfo';
-import { useTranslation } from './useTranslation';
+import { useTranslation } from 'react-i18next';
 
 export default function Casino() {
   const { t } = useTranslation();
@@ -22,7 +22,7 @@ export default function Casino() {
 
       {/* Top Games */}
       <div>
-        <h3 className="text-xl font-bold mb-2 flex items-center gap-2">🔥 {t.top_games}</h3>
+        <h3 className="text-xl font-bold mb-2 flex items-center gap-2">🔥 {t('top_games')}</h3>
         <div className="flex gap-4 overflow-x-auto">
           <GameCard title="Slot Game" image="/01.PNG" />
           <GameCard title="Gates of Olympus" image="https://via.placeholder.com/150x150?text=Olympus" />
@@ -32,7 +32,7 @@ export default function Casino() {
 
       {/* Live Casino */}
       <div>
-        <h3 className="text-xl font-bold mb-2 flex items-center gap-2">🎰 {t.live}</h3>
+        <h3 className="text-xl font-bold mb-2 flex items-center gap-2">🎰 {t('live')}</h3>
         <div className="flex gap-4 overflow-x-auto">
           <GameCard title="Live Blackjack" image="https://via.placeholder.com/150x150?text=Blackjack" />
           <GameCard title="Auto Roulette" image="https://via.placeholder.com/150x150?text=Roulette" />

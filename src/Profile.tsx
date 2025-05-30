@@ -1,7 +1,8 @@
+
 import React from "react";
 import { useLanguage } from "./LanguageContext";
 import type { Language } from "./LanguageContext";
-import { useTranslation } from "./useTranslation";
+import { useTranslation } from "react-i18next";
 
 export default function Profile() {
   const { lang, setLang } = useLanguage();
@@ -9,17 +10,16 @@ export default function Profile() {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>{t.profile}</h2>
+      <h2>{t("profile")}</h2>
       <p>
-        <strong>{t.user}:</strong> anh-tu
+        <strong>{t("user")}:</strong> anh-tu
       </p>
       <p>
-  <strong>{t.id}:</strong> 123456789
-</p>
-<p>
-  <strong>{t.joined}:</strong> 22 Tháng 5, 2025
-</p>
-
+        <strong>{t("id")}:</strong> 123456789
+      </p>
+      <p>
+        <strong>{t("joined")}:</strong> 22 Tháng 5, 2025
+      </p>
 
       <h3 style={{ marginTop: "20px" }}>🌐 Language</h3>
       <select
@@ -28,10 +28,10 @@ export default function Profile() {
       >
         <option value="vi">Tiếng Việt</option>
         <option value="en">English</option>
-        <option value="es">Español</option> {/* ✅ dòng này đã bật lại */}
+        <option value="es">Español</option>
       </select>
 
-      <h3 style={{ marginTop: "20px" }}>{t.promotions}</h3>
+      <h3 style={{ marginTop: "20px" }}>{t("promotions")}</h3>
       <div
         style={{
           background: "#333",
@@ -40,11 +40,11 @@ export default function Profile() {
           borderRadius: "10px",
         }}
       >
-        🎁 {t.promo1}
+        🎁 {t("promo1")}
         <br />
-        💰 {t.promo2}
+        💰 {t("promo2")}
         <br />
-        <i style={{ fontSize: "12px", opacity: 0.7 }}>{t.pending}</i>
+        <i style={{ fontSize: "12px", opacity: 0.7 }}>{t("pending")}</i>
       </div>
     </div>
   );
