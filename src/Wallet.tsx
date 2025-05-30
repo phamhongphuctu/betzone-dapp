@@ -24,6 +24,7 @@ const mockUserStore: Record<string, UserData> = {
 export default function Wallet() {
   const { t } = useTranslation();
   const [userData, setUserData] = useState<UserData | null>(null);
+  const [showDepositInfo, setShowDepositInfo] = useState(false);
 
   useEffect(() => {
     const cached = localStorage.getItem('pi_user');
@@ -34,29 +35,21 @@ export default function Wallet() {
     }
   }, []);
 
-  const handleDeposit = async () => {
-    try {
-      if (!window.Pi || !window.Pi.createPayment) {
-        alert(t('sdk_not_ready'));
-        return;
-      }
-
-      const payment = await window.Pi.createPayment({
-        amount: 1,
-        memo: userData?.username || 'no_user',
-        metadata: { type: 'deposit', source: 'wallet' },
-      });
-
-      console.log(t('deposit_success'), payment);
-      alert(t('deposit_sent'));
-    } catch (error) {
-      console.error(t('deposit_error'), error);
-      alert(t('deposit_failed'));
+  const handleDeposit = () => {
+    if (!userData?.walletAddress) {
+      alert('⚠️ Không có địa chỉ ví. Không thể nạp Pi.');
+      return;
     }
+    setShowDepositInfo(true);
   };
 
   const handleWithdraw = () => {
     alert(t('withdraw_not_ready'));
+  };
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    alert('📋 Đã sao chép vào clipboard!');
   };
 
   return (
@@ -104,6 +97,31 @@ export default function Wallet() {
           ⬇ {t('withdraw_button')}
         </button>
       </div>
+
+      {showDepositInfo && userData?.walletAddress && (
+        <div
+          style={{
+            marginTop: '30px',
+            padding: '20px',
+            backgroundColor: '#f9f9f9',
+            borderRadius: '10px',
+            border: '1px solid #ccc',
+          }}
+        >
+          <h3 style={{ marginBottom: '10px' }}>🚀 Nạp Pi vào tài khoản</h3>
+          <p>Token: <strong>Pi (Testnet)</strong></p>
+          <p>Địa chỉ ví:</p>
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+            <code style={{ wordBreak: 'break-all', flex: 1 }}>{userData.walletAddress}</code>
+            <button onClick={() => copyToClipboard(userData.walletAddress!)} style={{ marginLeft: '10px' }}>📋</button>
+          </div>
+          <p>📌 <strong>Memo</strong> (bắt buộc):</p>
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+            <code style={{ wordBreak: 'break-all', flex: 1 }}>{userData.username}</code>
+            <button onClick={() => copyToClipboard(userData.username)} style={{ marginLeft: '10px' }}>📋</button>
+          </div>
+        </div>
+      )}
 
       <h3 style={{ marginTop: '20px' }}>📜 {t('transaction_history')}</h3>
       <ul>
