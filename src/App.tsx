@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./styles.css";
 
@@ -10,10 +10,17 @@ import Earn from "./Earn";
 import Profile from "./Profile";
 import SlotGame from "./components/SlotGame";
 
-import { useTranslation } from "react-i18next"; // ✅ dùng hook i18n
+import { useTranslation } from "react-i18next";
 
 function AppContent() {
-  const { t } = useTranslation(); // ✅ dùng t("...") thay cho t.xxx
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    const Pi = (window as any).Pi;
+    if (Pi && Pi.init) {
+      Pi.init({ version: "2.0" });
+    }
+  }, []);
 
   return (
     <div className="page-container" style={{ position: "relative", minHeight: "100vh" }}>

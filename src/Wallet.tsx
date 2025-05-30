@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 
 interface UserData {
   username: string;
@@ -11,7 +12,7 @@ interface UserData {
 const mockUserStore: Record<string, UserData> = {
   'anh-tu': {
     username: 'anh-tu',
-    walletAddress: 'GC123...XYZ',
+    walletAddress: 'GC1234567890XYZTESTPIADDRESS',
     balance: 3000,
     history: [
       '+500 Pi từ phần thưởng (hôm qua)',
@@ -23,17 +24,21 @@ const mockUserStore: Record<string, UserData> = {
 
 export default function Wallet() {
   const { t } = useTranslation();
+  const location = useLocation();
   const [userData, setUserData] = useState<UserData | null>(null);
   const [showDepositInfo, setShowDepositInfo] = useState(false);
+  const [showWithdrawInfo, setShowWithdrawInfo] = useState(false);
 
   useEffect(() => {
     const cached = localStorage.getItem('pi_user');
     if (cached) {
       const user = JSON.parse(cached);
-      const data = mockUserStore[user.username];
+      const data = mockUserStore[user.username] || mockUserStore['anh-tu'];
       setUserData(data);
+    } else {
+      setUserData(mockUserStore['anh-tu']);
     }
-  }, []);
+  }, [location]);
 
   const handleDeposit = () => {
     if (!userData?.walletAddress) {
@@ -41,10 +46,12 @@ export default function Wallet() {
       return;
     }
     setShowDepositInfo(true);
+    setShowWithdrawInfo(false);
   };
 
   const handleWithdraw = () => {
-    alert(t('withdraw_not_ready'));
+    setShowDepositInfo(false);
+    setShowWithdrawInfo(true);
   };
 
   const copyToClipboard = (text: string) => {
@@ -98,6 +105,7 @@ export default function Wallet() {
         </button>
       </div>
 
+      {/* --- Deposit Section --- */}
       {showDepositInfo && userData?.walletAddress && (
         <div
           style={{
@@ -120,6 +128,65 @@ export default function Wallet() {
             <code style={{ wordBreak: 'break-all', flex: 1 }}>{userData.username}</code>
             <button onClick={() => copyToClipboard(userData.username)} style={{ marginLeft: '10px' }}>📋</button>
           </div>
+        </div>
+      )}
+
+      {/* --- Withdraw Section --- */}
+      {showWithdrawInfo && (
+        <div
+          style={{
+            marginTop: '30px',
+            padding: '20px',
+            backgroundColor: '#f9f9f9',
+            borderRadius: '10px',
+            border: '1px solid #ccc',
+          }}
+        >
+          <h3 style={{ marginBottom: '10px' }}>📤 Rút Pi từ tài khoản</h3>
+          <p>Token: <strong>Pi (Testnet)</strong></p>
+
+          <p>Địa chỉ nhận:</p>
+          <input
+            type="text"
+            placeholder="Nhập địa chỉ ví Pi"
+            style={{
+              width: '100%',
+              padding: '8px',
+              borderRadius: '6px',
+              border: '1px solid #ccc',
+              marginBottom: '10px',
+            }}
+          />
+
+          <p>📌 <strong>Memo</strong> (bắt buộc):</p>
+          <input
+            type="text"
+            placeholder="Nhập Memo (username)"
+            defaultValue={userData?.username}
+            style={{
+              width: '100%',
+              padding: '8px',
+              borderRadius: '6px',
+              border: '1px solid #ccc',
+              marginBottom: '10px',
+            }}
+          />
+
+          <button
+            onClick={() => alert('🚧 Chức năng rút Pi đang được phát triển')}
+            style={{
+              marginTop: '10px',
+              padding: '10px 20px',
+              borderRadius: '6px',
+              background: 'orange',
+              color: '#fff',
+              fontWeight: 'bold',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            Gửi yêu cầu rút Pi
+          </button>
         </div>
       )}
 

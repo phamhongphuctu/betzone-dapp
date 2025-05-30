@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
   const { t } = useTranslation();
   const [piUser, setPiUser] = useState<{ username?: string } | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loginWithPi = async () => {
@@ -32,6 +33,10 @@ export default function HomePage() {
     loginWithPi();
   }, []);
 
+  const handleGoToDeposit = () => {
+    navigate('/wallet', { state: { showDeposit: true } });
+  };
+
   return (
     <div style={{ padding: "20px" }}>
       {/* Thông tin user */}
@@ -44,7 +49,7 @@ export default function HomePage() {
           marginBottom: "20px",
         }}
       >
-        <p>👤 {t("user")}: {piUser?.username || t("pending")}</p>
+        <p>🕤 {t("user")}: {piUser?.username || t("pending")}</p>
       </div>
 
       {/* 👋 Lời chào mừng */}
@@ -68,22 +73,21 @@ export default function HomePage() {
         <h2 style={{ fontSize: "24px", fontWeight: "bold" }}>{t("promotions")}</h2>
         <p style={{ fontSize: "16px", marginTop: "10px" }}>{t("promo1")}</p>
 
-        <Link to="/wallet">
-          <button
-            style={{
-              marginTop: "20px",
-              padding: "12px 24px",
-              fontWeight: "bold",
-              borderRadius: "8px",
-              background: "yellow",
-              border: "none",
-              color: "#000",
-              cursor: "pointer",
-            }}
-          >
-            🚀 {t("deposit_button")}
-          </button>
-        </Link>
+        <button
+          onClick={handleGoToDeposit}
+          style={{
+            marginTop: "20px",
+            padding: "12px 24px",
+            fontWeight: "bold",
+            borderRadius: "8px",
+            background: "yellow",
+            border: "none",
+            color: "#000",
+            cursor: "pointer",
+          }}
+        >
+          🚀 {t("deposit_button")}
+        </button>
       </div>
     </div>
   );
