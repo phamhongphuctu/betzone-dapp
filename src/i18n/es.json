@@ -45,6 +45,9 @@
   "deposit_error": "❌ Error al enviar la solicitud de depósito:",
   "deposit_failed": "❌ Error al depositar Pi. Revisa la consola para más detalles.",
   "withdraw_not_ready": "👉 Función de retiro en desarrollo.",
-  "homepage_welcome": "🎉 ¡Bienvenido a Betzone! ¡Diviértete y mucha suerte!"
-
-}
+  "homepage_welcome": "🎉 ¡Bienvenido a Betzone! ¡Diviértete y mucha suerte!",
+  
+    "deposit_title": "Depositar Pi en la cuenta",
+    "withdraw_title": "Retirar Pi de la cuenta",
+    "send_withdraw": "Enviar solicitud de retiro"
+  }

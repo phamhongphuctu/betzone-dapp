@@ -49,8 +49,14 @@
     "deposit_error": "❌ Lỗi khi gửi yêu cầu nạp Pi:",
     "deposit_failed": "❌ Có lỗi xảy ra khi nạp Pi. Kiểm tra console để biết chi tiết.",
     "withdraw_not_ready": "👉 Tính năng rút Pi đang được phát triển.",
-"homepage_welcome": "🎉 Chào mừng bạn đến với Betzone! Hãy chơi vui và may mắn nhé!"
+"homepage_welcome": "🎉 Chào mừng bạn đến với Betzone! Hãy chơi vui và may mắn nhé!",
+
+  "deposit_title": "Nạp Pi vào tài khoản",
+  "withdraw_title": "Rút Pi từ tài khoản",
+  "send_withdraw": "Gửi yêu cầu rút Pi"
 }
+
+
 
   
 
