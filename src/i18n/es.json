@@ -1,13 +1,16 @@
-{"profile": "Perfil",
-
-"user": "Usuario",
+{
+  "profile": "Perfil",
+  "user": "Usuario",
+  "username": "Nombre de usuario",
+  "wallet_address": "Dirección de la billetera",
   "pi_balance": "Saldo de Pi",
   "pending": "Pendiente",
+
   "promotions": "Promociones",
   "promo1": "Obtén 50 giros gratis al iniciar sesión",
   "promo2": "Reembolso diario del 10% en Pi",
   "promo3": "Competencia semanal por 300 Pi",
-  
+
   "favorites": "Favoritos",
   "recent": "Jugados recientemente",
   "top_games": "Juegos destacados",
@@ -15,7 +18,7 @@
   "live": "Casino en vivo",
   "game_shows": "Shows de juegos",
   "all_games": "Todos los juegos",
-  "casino": "Casino", 
+  "casino": "Casino",
   "sports": "Deportes",
   "live_today": "En vivo hoy",
   "upcoming": "Próximamente",
@@ -24,13 +27,13 @@
   "tennis": "Tenis",
   "volleyball": "Vóleibol",
   "mma": "Artes marciales mixtas",
-  "earn": "Ganar recompensas",
-  "welcome": "Bienvenido",
 
+  "earn": "Ganar recompensas",
   "refer": "Invitar amigos",
   "play": "Jugar y ganar Pi",
   "promote": "Participar en promociones",
   "howToEarn": "Formas de ganar Pi",
+
   "wallet": "Billetera",
   "balance": "Saldo",
   "deposit_button": "Depositar Pi",
@@ -39,15 +42,19 @@
   "reward_yesterday": "de la recompensa de ayer",
   "slot_game": "por jugar Slot Game",
   "manual_deposit": "Depósito manual",
+
   "sdk_not_ready": "❌ SDK de Pi no está listo. Asegúrate de usar Pi Browser Testnet.",
   "deposit_success": "✅ Solicitud de depósito enviada:",
   "deposit_sent": "✅ Depósito de prueba enviado.",
   "deposit_error": "❌ Error al enviar la solicitud de depósito:",
   "deposit_failed": "❌ Error al depositar Pi. Revisa la consola para más detalles.",
   "withdraw_not_ready": "👉 Función de retiro en desarrollo.",
+
   "homepage_welcome": "🎉 ¡Bienvenido a Betzone! ¡Diviértete y mucha suerte!",
+
+  "deposit_title": "Depositar Pi en la cuenta",
+  "withdraw_title": "Retirar Pi de la cuenta",
+  "send_withdraw": "Enviar solicitud de retiro",
   
-    "deposit_title": "Depositar Pi en la cuenta",
-    "withdraw_title": "Retirar Pi de la cuenta",
-    "send_withdraw": "Enviar solicitud de retiro"
-  }
+  "welcome": "Bienvenido"
+}

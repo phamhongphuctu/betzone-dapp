@@ -1,18 +1,23 @@
-{"profile": "Profile",
-"user": "User",
+{
+  "profile": "Profile",
+  "user": "User",
+  "username": "Username",
+  "wallet_address": "Wallet Address",
   "pi_balance": "Pi Balance",
+  "balance": "Pi Balance",
   "pending": "Pending",
+
   "promotions": "Hot Promotions",
   "promo1": "Get 50 free spins when logging in",
   "promo2": "10% Pi cashback daily",
   "promo3": "Top weekly competition for 300 Pi",
+
   "welcome": "Welcome",
   "logout": "Logout",
   "login": "Login",
-  "username": "User",
   "id": "ID",
   "joined": "Joined",
-  
+
   "favorites": "Favorites",
   "recent": "Recently Played",
   "top_games": "Top Games",
@@ -29,31 +34,31 @@
   "tennis": "Tennis",
   "volleyball": "Volleyball",
   "mma": "MMA",
+
   "earn": "Earn Rewards",
   "refer": "Invite Friends",
   "play": "Play games and get Pi back",
   "promote": "Join promotions",
   "howToEarn": "Ways to earn Pi",
+
   "wallet": "Wallet",
-  "balance": "Pi Balance",
   "deposit_button": "Deposit Pi",
   "withdraw_button": "Withdraw Pi",
   "transaction_history": "Transaction History",
   "reward_yesterday": "from yesterday's reward",
   "slot_game": "for playing Slot Game",
   "manual_deposit": "Manual deposit",
+
   "sdk_not_ready": "❌ Pi SDK not ready. Please make sure you're using Pi Browser Testnet.",
   "deposit_success": "✅ Deposit request sent:",
   "deposit_sent": "✅ Pi test deposit sent.",
   "deposit_error": "❌ Error sending Pi deposit request:",
   "deposit_failed": "❌ Failed to deposit Pi. Check console for details.",
   "withdraw_not_ready": "👉 Withdraw feature is under development.",
+
   "homepage_welcome": "🎉 Welcome to Betzone! Have fun and good luck!",
-  
-    "deposit_title": "Deposit Pi to Account",
-    "withdraw_title": "Withdraw Pi from Account",
-    "send_withdraw": "Submit Withdraw Request"
-  }
-  
 
-
+  "deposit_title": "Deposit Pi to Account",
+  "withdraw_title": "Withdraw Pi from Account",
+  "send_withdraw": "Submit Withdraw Request"
+}
