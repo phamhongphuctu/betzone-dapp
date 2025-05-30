@@ -1,8 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+interface UserData {
+  username: string;
+  walletAddress: string | null;
+  balance: number;
+  history: string[];
+}
+
+const mockUserStore: Record<string, UserData> = {
+  'anh-tu': {
+    username: 'anh-tu',
+    walletAddress: 'GC123...XYZ',
+    balance: 3000,
+    history: [
+      '+500 Pi từ phần thưởng (hôm qua)',
+      '-100 Pi chơi Slot Game',
+      '+1,000 Pi nạp thủ công',
+    ],
+  },
+};
 
 export default function Wallet() {
   const { t } = useTranslation();
+  const [userData, setUserData] = useState<UserData | null>(null);
+
+  useEffect(() => {
+    const cached = localStorage.getItem('pi_user');
+    if (cached) {
+      const user = JSON.parse(cached);
+      const data = mockUserStore[user.username];
+      setUserData(data);
+    }
+  }, []);
 
   const handleDeposit = async () => {
     try {
@@ -13,7 +43,7 @@ export default function Wallet() {
 
       const payment = await window.Pi.createPayment({
         amount: 1,
-        memo: 'Nạp Pi vào Betzone (Testnet)',
+        memo: userData?.username || 'no_user',
         metadata: { type: 'deposit', source: 'wallet' },
       });
 
@@ -33,54 +63,53 @@ export default function Wallet() {
     <div style={{ padding: '20px' }}>
       <h2>{t('wallet')}</h2>
       <p>
-        {t('balance')}: <strong>3,000 Pi</strong>
+        {t('user')}: <strong>{userData?.username || t('pending')}</strong>
+      </p>
+      <p>
+        {t('balance')}: <strong>{userData?.balance.toLocaleString()} Pi</strong>
+      </p>
+      <p>
+        Ví: <strong>{userData?.walletAddress || 'Chưa có'}</strong>
       </p>
 
-      <button
-        onClick={handleDeposit}
-        style={{
-          marginTop: '10px',
-          width: '40px',
-          height: '40px',
-          borderRadius: '6px',
-          border: '1px solid #ccc',
-          backgroundColor: '#f5f5f5',
-          fontSize: '20px',
-          fontWeight: 'bold',
-          cursor: 'pointer',
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        ⬆
-      </button>
+      <div style={{ marginTop: '20px' }}>
+        <button
+          onClick={handleDeposit}
+          style={{
+            padding: '10px 20px',
+            borderRadius: '6px',
+            border: '1px solid #ccc',
+            backgroundColor: '#f5f5f5',
+            fontSize: '14px',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            marginRight: '10px',
+          }}
+        >
+          ⬆ {t('deposit_button')}
+        </button>
 
-      <button
-        onClick={handleWithdraw}
-        style={{
-          marginLeft: '10px',
-          width: '40px',
-          height: '40px',
-          borderRadius: '6px',
-          border: '1px solid #ccc',
-          backgroundColor: '#f5f5f5',
-          fontSize: '20px',
-          fontWeight: 'bold',
-          cursor: 'pointer',
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        ⬇
-      </button>
+        <button
+          onClick={handleWithdraw}
+          style={{
+            padding: '10px 20px',
+            borderRadius: '6px',
+            border: '1px solid #ccc',
+            backgroundColor: '#f5f5f5',
+            fontSize: '14px',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+          }}
+        >
+          ⬇ {t('withdraw_button')}
+        </button>
+      </div>
 
       <h3 style={{ marginTop: '20px' }}>📜 {t('transaction_history')}</h3>
       <ul>
-        <li>+500 Pi {t('reward_yesterday')}</li>
-        <li>-100 Pi {t('slot_game')}</li>
-        <li>+1,000 Pi {t('manual_deposit')}</li>
+        {userData?.history.map((item, idx) => (
+          <li key={idx}>{item}</li>
+        ))}
       </ul>
     </div>
   );
