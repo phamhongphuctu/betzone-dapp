@@ -18,7 +18,7 @@ export default function HomePage() {
 
       try {
         console.log("🔁 Đang gọi Pi.init...");
-        await Pi.init({ version: "2.0", sandbox: false }); // <-- nhớ sandbox đúng theo môi trường
+        await Pi.init({ version: "2.0", sandbox: false });
         console.log("✅ Pi.init đã gọi xong");
 
         const cached = localStorage.getItem("pi_user");
@@ -46,6 +46,34 @@ export default function HomePage() {
     navigate("/wallet", { state: { showDeposit: true } });
   };
 
+  const handleTestPayment = () => {
+    const Pi = (window as any).Pi;
+
+    Pi.createPayment(
+      {
+        amount: 0.01,
+        memo: "Test transaction",
+        metadata: { type: "test" }
+      },
+      {
+        onReadyForServerApproval: (paymentId: string) => {
+          console.log("✅ Giao dịch chờ xác nhận từ server:", paymentId);
+          Pi.approvePayment(paymentId); // cho test client-only
+        },
+        onReadyForServerCompletion: (paymentId: string, txid: string) => {
+          console.log("🎉 Giao dịch thành công:", paymentId, txid);
+          Pi.completePayment(paymentId);
+        },
+        onCancel: (paymentId: string) => {
+          console.log("❌ Giao dịch bị huỷ:", paymentId);
+        },
+        onError: (error: any, paymentId: string) => {
+          console.error("❌ Lỗi thanh toán:", error);
+        }
+      }
+    );
+  };
+
   return (
     <div style={{ padding: "20px" }}>
       <div
@@ -66,7 +94,7 @@ export default function HomePage() {
 
       <div
         style={{
-          backgroundImage: 'url("/welcome-bonus.png")', // ✅ đổi placeholder hỏng
+          backgroundImage: 'url("/welcome-bonus.png")',
           backgroundSize: "cover",
           backgroundPosition: "center",
           borderRadius: "12px",
@@ -93,6 +121,22 @@ export default function HomePage() {
           }}
         >
           🚀 {t("deposit_button")}
+        </button>
+
+        <br /><br />
+
+        <button
+          onClick={handleTestPayment}
+          style={{
+            padding: "10px 20px",
+            background: "#0f0",
+            border: "none",
+            borderRadius: "8px",
+            fontWeight: "bold",
+            cursor: "pointer"
+          }}
+        >
+          💳 Thanh toán thử 0.01 Pi
         </button>
       </div>
     </div>
