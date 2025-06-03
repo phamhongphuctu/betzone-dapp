@@ -17,16 +17,15 @@ export default function HomePage() {
       }
 
       try {
-        console.log("🔁 Đang gọi Pi.init...");
-        await Pi.init({ version: "2.0" }); // ✅ bỏ `sandbox: true` khi test trên Pi Browser thật
-
-        console.log("✅ Pi.init đã gọi xong");
+        console.log("🔁 Gọi Pi.init...");
+        await Pi.init({ version: "2.0" }); // ✅ KHÔNG dùng sandbox ở Pi Browser thật
+        console.log("✅ Pi.init xong");
 
         const cached = localStorage.getItem("pi_user");
         if (cached) {
           const parsed = JSON.parse(cached);
           setPiUser(parsed);
-          console.log("📦 Dùng user từ cache:", parsed);
+          console.log("📦 Dùng cache:", parsed);
           return;
         }
 
@@ -36,7 +35,7 @@ export default function HomePage() {
         localStorage.setItem("pi_user", JSON.stringify(user));
         setPiUser(user);
       } catch (error) {
-        console.error("❌ Pi login error:", error);
+        console.error("❌ Lỗi đăng nhập:", error);
       }
     };
 
@@ -63,7 +62,7 @@ export default function HomePage() {
       },
       {
         onReadyForServerApproval: async (paymentId: string) => {
-          console.log("🟡 Giao dịch chờ duyệt:", paymentId);
+          console.log("🟡 Đợi duyệt:", paymentId);
           try {
             const res = await fetch("https://betzone-wallet-api.onrender.com/api/approve-payment", {
               method: "POST",
@@ -71,7 +70,7 @@ export default function HomePage() {
               body: JSON.stringify({ paymentId })
             });
             const data = await res.json();
-            console.log("✅ Server approve:", data);
+            console.log("✅ Đã duyệt:", data);
           } catch (err) {
             console.error("❌ approve-payment lỗi:", err);
           }
@@ -83,25 +82,23 @@ export default function HomePage() {
             const res = await fetch("https://betzone-wallet-api.onrender.com/api/complete-payment", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ paymentId, txid }),
+              body: JSON.stringify({ paymentId, txid })
             });
             const data = await res.json();
-            console.log("✅ Server completed:", data);
-            
-            // ✅ QUAN TRỌNG: báo cho Pi SDK là xong
+            console.log("✅ Đã hoàn tất:", data);
             return true;
           } catch (e) {
             console.error("❌ complete-payment lỗi:", e);
-            return false; // báo thất bại nếu lỗi
+            return false;
           }
         },
-        
+
         onCancel: (paymentId: string) => {
-          console.warn("⚠️ Giao dịch bị huỷ:", paymentId);
+          console.warn("⚠️ Đã huỷ:", paymentId);
         },
 
         onError: (error: any, paymentId: string) => {
-          console.error("❌ Lỗi khi thanh toán:", error, "ID:", paymentId);
+          console.error("❌ Lỗi thanh toán:", error, "ID:", paymentId);
         }
       }
     );
@@ -109,15 +106,13 @@ export default function HomePage() {
 
   return (
     <div style={{ padding: "20px" }}>
-      <div
-        style={{
-          backgroundColor: "#222",
-          color: "#fff",
-          padding: "15px",
-          borderRadius: "10px",
-          marginBottom: "20px",
-        }}
-      >
+      <div style={{
+        backgroundColor: "#222",
+        color: "#fff",
+        padding: "15px",
+        borderRadius: "10px",
+        marginBottom: "20px"
+      }}>
         <p>🕤 {t("user")}: {piUser?.username || t("pending")}</p>
       </div>
 
@@ -125,18 +120,16 @@ export default function HomePage() {
         {t("homepage_welcome")}
       </h2>
 
-      <div
-        style={{
-          backgroundImage: 'url("/welcome-bonus.png")',
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          borderRadius: "12px",
-          padding: "40px 20px",
-          color: "#fff",
-          textAlign: "center",
-          marginBottom: "30px",
-        }}
-      >
+      <div style={{
+        backgroundImage: 'url("/welcome-bonus.png")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        borderRadius: "12px",
+        padding: "40px 20px",
+        color: "#fff",
+        textAlign: "center",
+        marginBottom: "30px"
+      }}>
         <h2 style={{ fontSize: "24px", fontWeight: "bold" }}>{t("promotions")}</h2>
         <p style={{ fontSize: "16px", marginTop: "10px" }}>{t("promo1")}</p>
 
@@ -150,7 +143,7 @@ export default function HomePage() {
             background: "yellow",
             border: "none",
             color: "#000",
-            cursor: "pointer",
+            cursor: "pointer"
           }}
         >
           🚀 {t("deposit_button")}
