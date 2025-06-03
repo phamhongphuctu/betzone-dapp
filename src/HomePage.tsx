@@ -11,14 +11,14 @@ export default function HomePage() {
     const loginWithPi = async () => {
       const Pi = (window as any).Pi;
 
-      if (!Pi || typeof Pi.init !== "function" || typeof Pi.authenticate !== "function") {
+      if (!Pi?.init || !Pi?.authenticate) {
         alert("❌ Pi SDK chưa sẵn sàng. Hãy mở trong Pi Browser.");
         return;
       }
 
       try {
         console.log("🔁 Đang gọi Pi.init...");
-        await Pi.init({ version: "2.0", sandbox: false });
+        await Pi.init({ version: "2.0", sandbox: true }); // ✅ Quan trọng: sandbox = true
         console.log("✅ Pi.init đã gọi xong");
 
         const cached = localStorage.getItem("pi_user");
@@ -31,7 +31,6 @@ export default function HomePage() {
 
         console.log("🔐 Gọi Pi.authenticate...");
         const user = await Pi.authenticate(["username", "payments"]);
-
         console.log("✅ Đăng nhập thành công:", user);
         localStorage.setItem("pi_user", JSON.stringify(user));
         setPiUser(user);
@@ -50,6 +49,11 @@ export default function HomePage() {
   const handleTestPayment = () => {
     const Pi = (window as any).Pi;
 
+    if (!Pi?.createPayment) {
+      alert("❌ Pi SDK chưa sẵn sàng!");
+      return;
+    }
+
     Pi.createPayment(
       {
         amount: 0.01,
@@ -57,19 +61,42 @@ export default function HomePage() {
         metadata: { type: "test" }
       },
       {
-        onReadyForServerApproval: (paymentId: string) => {
-          console.log("✅ Giao dịch chờ xác nhận từ server:", paymentId);
-          Pi.approvePayment(paymentId); // cho test client-only
+        onReadyForServerApproval: async (paymentId: string) => {
+          console.log("🟡 Giao dịch chờ duyệt:", paymentId);
+          try {
+            const res = await fetch("https://betzone-wallet-api.onrender.com/api/approve-payment", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ paymentId })
+            });
+            const data = await res.json();
+            console.log("✅ Server approve:", data);
+          } catch (err) {
+            console.error("❌ approve-payment lỗi:", err);
+          }
         },
-        onReadyForServerCompletion: (paymentId: string, txid: string) => {
+
+        onReadyForServerCompletion: async (paymentId: string, txid: string) => {
           console.log("🎉 Giao dịch thành công:", paymentId, txid);
-          Pi.completePayment(paymentId);
+          try {
+            const res = await fetch("https://betzone-wallet-api.onrender.com/api/complete-payment", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ paymentId, txid })
+            });
+            const data = await res.json();
+            console.log("✅ Server completed:", data);
+          } catch (err) {
+            console.error("❌ complete-payment lỗi:", err);
+          }
         },
+
         onCancel: (paymentId: string) => {
-          console.log("❌ Giao dịch bị huỷ:", paymentId);
+          console.warn("⚠️ Giao dịch bị huỷ:", paymentId);
         },
+
         onError: (error: any, paymentId: string) => {
-          console.error("❌ Lỗi thanh toán:", error);
+          console.error("❌ Lỗi khi thanh toán:", error, "ID:", paymentId);
         }
       }
     );
