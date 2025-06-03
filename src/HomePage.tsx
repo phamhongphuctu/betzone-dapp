@@ -18,7 +18,8 @@ export default function HomePage() {
 
       try {
         console.log("🔁 Đang gọi Pi.init...");
-        await Pi.init({ version: "2.0", sandbox: true }); // ✅ Quan trọng: sandbox = true
+        await Pi.init({ version: "2.0" }); // ✅ bỏ `sandbox: true` khi test trên Pi Browser thật
+
         console.log("✅ Pi.init đã gọi xong");
 
         const cached = localStorage.getItem("pi_user");
