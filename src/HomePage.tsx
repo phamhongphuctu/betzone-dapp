@@ -30,7 +30,8 @@ export default function HomePage() {
         }
 
         console.log("🔐 Gọi Pi.authenticate...");
-        const user = await Pi.authenticate(["username"]);
+        const user = await Pi.authenticate(["username", "payments"]);
+
         console.log("✅ Đăng nhập thành công:", user);
         localStorage.setItem("pi_user", JSON.stringify(user));
         setPiUser(user);
