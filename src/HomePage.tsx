@@ -11,27 +11,26 @@ export default function HomePage() {
     const loginWithPi = async () => {
       const Pi = (window as any).Pi;
 
-      if (!Pi || !Pi.init || !Pi.authenticate) {
+      if (!Pi || typeof Pi.init !== "function" || typeof Pi.authenticate !== "function") {
         alert("❌ Pi SDK chưa sẵn sàng. Hãy mở trong Pi Browser.");
         return;
       }
 
       try {
-        // ✅ Bước 1: Khởi tạo SDK trước
-        await Pi.init({ version: "2.0", sandbox: false });
+        console.log("🔁 Đang gọi Pi.init...");
+        await Pi.init({ version: "2.0", sandbox: false }); // <-- nhớ sandbox đúng theo môi trường
         console.log("✅ Pi.init đã gọi xong");
 
-        // ✅ Bước 2: Nếu đã lưu user thì dùng lại
         const cached = localStorage.getItem("pi_user");
         if (cached) {
           const parsed = JSON.parse(cached);
           setPiUser(parsed);
-          console.log("📦 Dùng user từ localStorage:", parsed);
+          console.log("📦 Dùng user từ cache:", parsed);
           return;
         }
 
-        // ✅ Bước 3: Gọi login
-        const user = await Pi.authenticate({ scopes: ["username"] });
+        console.log("🔐 Gọi Pi.authenticate...");
+        const user = await Pi.authenticate(["username"]);
         console.log("✅ Đăng nhập thành công:", user);
         localStorage.setItem("pi_user", JSON.stringify(user));
         setPiUser(user);
@@ -67,7 +66,7 @@ export default function HomePage() {
 
       <div
         style={{
-          backgroundImage: 'url("https://via.placeholder.com/600x200?text=Welcome+Bonus")',
+          backgroundImage: 'url("/welcome-bonus.png")', // ✅ đổi placeholder hỏng
           backgroundSize: "cover",
           backgroundPosition: "center",
           borderRadius: "12px",
