@@ -10,39 +10,45 @@ export default function HomePage() {
   useEffect(() => {
     const loginWithPi = async () => {
       const Pi = (window as any).Pi;
-  
-      // ✅ Kiểm tra SDK có đầy đủ không
-      if (!Pi || !Pi.createPayment) {
-        alert("❌ Pi SDK chưa sẵn sàng. Hãy chắc chắn bạn đang dùng Pi Browser Testnet.");
+
+      if (!Pi || !Pi.init || !Pi.authenticate) {
+        alert("❌ Pi SDK chưa sẵn sàng. Hãy mở trong Pi Browser.");
         return;
       }
-  
-      const cached = localStorage.getItem("pi_user");
-      if (cached) {
-        setPiUser(JSON.parse(cached));
-        return;
-      }
-  
+
       try {
+        // ✅ Bước 1: Khởi tạo SDK trước
+        await Pi.init({ version: "2.0", sandbox: false });
+        console.log("✅ Pi.init đã gọi xong");
+
+        // ✅ Bước 2: Nếu đã lưu user thì dùng lại
+        const cached = localStorage.getItem("pi_user");
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          setPiUser(parsed);
+          console.log("📦 Dùng user từ localStorage:", parsed);
+          return;
+        }
+
+        // ✅ Bước 3: Gọi login
         const user = await Pi.authenticate({ scopes: ["username"] });
-        setPiUser(user);
+        console.log("✅ Đăng nhập thành công:", user);
         localStorage.setItem("pi_user", JSON.stringify(user));
+        setPiUser(user);
       } catch (error) {
-        console.error("Pi login error:", error);
+        console.error("❌ Pi login error:", error);
       }
     };
-  
+
     loginWithPi();
   }, []);
-  
 
   const handleGoToDeposit = () => {
-    navigate('/wallet', { state: { showDeposit: true } });
+    navigate("/wallet", { state: { showDeposit: true } });
   };
 
   return (
     <div style={{ padding: "20px" }}>
-      {/* Thông tin user */}
       <div
         style={{
           backgroundColor: "#222",
@@ -55,12 +61,10 @@ export default function HomePage() {
         <p>🕤 {t("user")}: {piUser?.username || t("pending")}</p>
       </div>
 
-      {/* 👋 Lời chào mừng */}
       <h2 style={{ fontSize: "20px", marginBottom: "20px" }}>
         {t("homepage_welcome")}
       </h2>
 
-      {/* Banner Welcome Bonus */}
       <div
         style={{
           backgroundImage: 'url("https://via.placeholder.com/600x200?text=Welcome+Bonus")',
