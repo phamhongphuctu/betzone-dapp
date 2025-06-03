@@ -77,20 +77,24 @@ export default function HomePage() {
         },
 
         onReadyForServerCompletion: async (paymentId: string, txid: string) => {
-          console.log("🎉 Giao dịch thành công:", paymentId, txid);
+          console.log("🎉 Giao dịch hoàn tất:", paymentId, txid);
           try {
             const res = await fetch("https://betzone-wallet-api.onrender.com/api/complete-payment", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ paymentId, txid })
+              body: JSON.stringify({ paymentId, txid }),
             });
             const data = await res.json();
             console.log("✅ Server completed:", data);
-          } catch (err) {
-            console.error("❌ complete-payment lỗi:", err);
+            
+            // ✅ QUAN TRỌNG: báo cho Pi SDK là xong
+            return true;
+          } catch (e) {
+            console.error("❌ complete-payment lỗi:", e);
+            return false; // báo thất bại nếu lỗi
           }
         },
-
+        
         onCancel: (paymentId: string) => {
           console.warn("⚠️ Giao dịch bị huỷ:", paymentId);
         },
@@ -170,3 +174,4 @@ export default function HomePage() {
     </div>
   );
 }
+
